@@ -141,3 +141,16 @@ Not Found: /favicon.ico
 [08/Jul/2026 16:43:06] "GET /static/campaign/css/site.css HTTP/1.1" 304 0
 [08/Jul/2026 16:43:11] "GET / HTTP/1.1" 200 50773
 [08/Jul/2026 16:43:11] "GET /static/campaign/css/site.css HTTP/1.1" 304 0
+[08/Jul/2026 16:59:31] "GET /static/campaign/css/site.css HTTP/1.1" 200 14817
+[08/Jul/2026 16:59:31,607] - Broken pipe from ('127.0.0.1', 59606)
+[08/Jul/2026 17:02:12] "GET / HTTP/1.1" 200 50773
+[08/Jul/2026 17:02:12] "GET /static/campaign/css/site.css HTTP/1.1" 200 14817
+[08/Jul/2026 17:02:12,796] - Broken pipe from ('127.0.0.1', 60046)
+[08/Jul/2026 17:02:12,855] - Broken pipe from ('127.0.0.1', 60045)
+[08/Jul/2026 17:03:21] "GET / HTTP/1.1" 200 50773
+[08/Jul/2026 17:03:21] "GET / HTTP/1.1" 200 50773
+[08/Jul/2026 17:03:21] "GET /reservar/?km=2 HTTP/1.1" 200 3126
+[08/Jul/2026 17:03:21] "GET /painel/login/ HTTP/1.1" 200 1567
+[08/Jul/2026 17:03:21,925] - Broken pipe from ('127.0.0.1', 58425)
+[08/Jul/2026 17:03:21] "GET /km/2/detalhe/ HTTP/1.1" 302 0
+[08/Jul/2026 17:03:22,060] - Broken pipe from ('127.0.0.1', 58420)

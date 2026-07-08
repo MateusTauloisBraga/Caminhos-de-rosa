@@ -5,13 +5,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Veredas de Ajuda | Caminhos de Rosa{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'campaign/css/site.css' %}">
+    <link rel="stylesheet" href="{% static 'campaign/css/site.css' %}?v=20260708-3">
+    <style>
+      body{margin:0;background:#f6ead8;color:#1a130d;font-family:Georgia,"Times New Roman",serif}
+      img{max-width:100%;height:auto}
+      .site-header{background:#f7ead6;border-bottom:1px solid rgba(67,38,18,.18)}
+      .header-inner{min-height:84px;width:min(1360px,calc(100% - 40px));margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+      .brand-logo{display:block;width:auto;max-width:170px;max-height:62px;object-fit:contain}
+      .hero-logo{display:block;width:auto;max-width:min(440px,74vw);max-height:190px;object-fit:contain}
+      .section{width:min(1360px,calc(100% - 40px));margin:0 auto}
+    </style>
   </head>
   <body>
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="{% url 'campaign:home' %}">
-          <img class="brand-logo" src="{% static 'campaign/img/marca.png' %}" alt="Caminhos de Rosa">
+          <img class="brand-logo" src="{% static 'campaign/img/marca.png' %}" alt="Caminhos de Rosa" width="170" height="130">
           <span>
             <span class="brand-title">Caminhos de Rosa</span>
             <span class="brand-subtitle">KM Solidário da travessia de 160 km</span>
