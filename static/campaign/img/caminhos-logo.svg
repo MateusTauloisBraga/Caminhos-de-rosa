@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 120" role="img" aria-labelledby="title">
+  <title id="title">Caminhos de Rosa</title>
+  <rect width="360" height="120" fill="none"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 86c34-20 72-20 115 0 44 19 87 19 129-1" stroke="#c83a00" stroke-width="6"/>
+    <path d="M39 69c31-14 62-14 94 0 31 14 63 14 96 0" stroke="#e2a000" stroke-width="4"/>
+    <path d="M272 27l0 21M262 37h21M265 30l15 15M280 30l-15 15" stroke="#1f3f1e" stroke-width="4"/>
+    <path d="M73 74c0-18 8-38 25-56 15 19 23 38 23 56" stroke="#1f3f1e" stroke-width="4"/>
+    <path d="M98 18v61M78 43h40M84 31h29M88 56h23" stroke="#1f3f1e" stroke-width="4"/>
+    <path d="M306 78c10-4 18-4 27 0M307 91c10-4 18-4 27 0" stroke="#f7ddbd" stroke-width="5"/>
+  </g>
+  <text x="142" y="48" fill="#1f3f1e" font-family="Georgia, serif" font-size="25" font-weight="700">Caminhos</text>
+  <text x="142" y="76" fill="#c83a00" font-family="Georgia, serif" font-size="27" font-weight="700">de Rosa</text>
+</svg>

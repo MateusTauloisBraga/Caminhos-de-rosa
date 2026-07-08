@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}KM {{ kilometer.number }} | Caminhos de Rosa{% endblock %}
+
+{% block content %}
+  <section class="form-shell km-detail">
+    <p class="eyebrow" style="color: var(--trail);">Pedaço de chão</p>
+    <h1>KM {{ kilometer.number }}</h1>
+    <dl class="detail-list">
+      <div>
+        <dt>Quem deixou nome</dt>
+        <dd>{{ kilometer.sponsor_name }}</dd>
+      </div>
+      <div>
+        <dt>Valor do auxílio</dt>
+        <dd>R$ {{ kilometer.amount }}</dd>
+      </div>
+      <div>
+        <dt>Situação</dt>
+        <dd>{{ kilometer.get_status_display }}</dd>
+      </div>
+      {% if kilometer.donor_message %}
+        <div class="detail-message">
+          <dt>Mensagem</dt>
+          <dd>{{ kilometer.donor_message }}</dd>
+        </div>
+      {% endif %}
+    </dl>
+    <a class="button secondary" href="{% url 'campaign:home' %}#quilometros">Voltar às veredas</a>
+  </section>
+{% endblock %}

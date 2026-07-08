@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Caderneta | Caminhos de Rosa{% endblock %}
+
+{% block content %}
+  <section class="form-shell compact-shell">
+    <p class="eyebrow" style="color: var(--trail);">Caderneta da travessia</p>
+    <h1>Senha da porteira</h1>
+    <form method="post" class="form-grid">
+      {% csrf_token %}
+      <div class="field">
+        <label for="password">Senha</label>
+        <input id="password" name="password" type="password" autofocus>
+      </div>
+      <button class="button" type="submit">Abrir a caderneta</button>
+    </form>
+  </section>
+{% endblock %}

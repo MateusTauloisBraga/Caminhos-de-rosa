@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}KM reservado | Caminhos de Rosa{% endblock %}
+
+{% block content %}
+  <section class="form-shell">
+    <p class="eyebrow" style="color: var(--trail);">Quase firmado</p>
+    <h1>Agora é o PIX, e pronto.</h1>
+    <div class="selected-kms">
+      {% for kilometer in kilometers %}
+        <span>KM {{ kilometer.number }}</span>
+      {% endfor %}
+    </div>
+    <p>
+      Faça o PIX pelo QR code ou pelo copia-e-cola abaixo. Depois, mande o comprovante pelo WhatsApp.
+      Conferido o sinal, seu nome entra no quilômetro escolhido e a contribuição segue para virar alimento.
+    </p>
+
+    <div class="pix-box pix-payment">
+      <div>
+        <strong>Chave PIX</strong>
+        <span class="pix-key" id="pix-key">{{ pix_key }}</span>
+        <button class="button pix-copy-button" type="button" data-copy-target="pix-key">Copiar chave</button>
+      </div>
+      <div>
+        <strong>PIX copia e cola</strong>
+        <span class="pix-key">{{ pix_copy_paste }}</span>
+        {% if total %}<small>Total informado: R$ {{ total }}</small>{% endif %}
+      </div>
+      <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data={{ pix_copy_paste|urlencode }}" alt="QR code do PIX copia e cola">
+    </div>
+
+    <div class="hero-actions">
+      <a class="button" href="{{ whatsapp_url }}" target="_blank" rel="noopener">Mandar comprovante no WhatsApp</a>
+      <a class="button secondary" href="{% url 'campaign:home' %}#quilometros">Voltar às veredas</a>
+    </div>
+  </section>
+  <script>
+    document.querySelectorAll("[data-copy-target]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const target = document.getElementById(button.dataset.copyTarget);
+        if (!target) return;
+        await navigator.clipboard.writeText(target.textContent.trim());
+        const original = button.textContent;
+        button.textContent = "Chave copiada";
+        window.setTimeout(() => {
+          button.textContent = original;
+        }, 1800);
+      });
+    });
+  </script>
+{% endblock %}

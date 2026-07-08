@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Caderneta da Travessia | Caminhos de Rosa{% endblock %}
+
+{% block content %}
+  <section class="section panel-section">
+    <div class="panel-heading">
+      <div>
+        <p class="eyebrow" style="color: var(--trail);">Caderneta da travessia</p>
+        <h1>Acerto dos KMs</h1>
+        <p class="section-note">Olhe o comprovante no WhatsApp e dê baixa nos KMs que já ficaram certos.</p>
+      </div>
+      <a class="button secondary" href="{% url 'campaign:panel_logout' %}">Fechar a porteira</a>
+    </div>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="panel-actions">
+        <button class="button" name="action" value="confirm" type="submit">Dar como certo</button>
+        <button class="button secondary" name="action" value="release" type="submit">Soltar de novo</button>
+      </div>
+
+      <h2>No aguardo do sinal ({{ pending_count }})</h2>
+      <div class="simple-table">
+        {% for km in pending %}
+          <label class="simple-row">
+            <input type="checkbox" name="kilometers" value="{{ km.id }}">
+            <span class="row-km">KM {{ km.number }}</span>
+            <span>{{ km.sponsor_name }}</span>
+            <span>R$ {{ km.amount }}</span>
+          </label>
+        {% empty %}
+          <p class="empty-state">Por ora, nenhum KM esperando conferência.</p>
+        {% endfor %}
+      </div>
+    </form>
+
+    <h2>Já firmados ({{ confirmed_count }})</h2>
+    <div class="simple-table confirmed-list">
+      {% for km in confirmed %}
+        <div class="simple-row">
+          <span class="row-km">KM {{ km.number }}</span>
+          <span>{{ km.sponsor_name }}</span>
+          <span>R$ {{ km.amount }}</span>
+        </div>
+      {% empty %}
+        <p class="empty-state">Nenhum KM firmado ainda.</p>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Reservar KMs | Caminhos de Rosa{% endblock %}
+
+{% block content %}
+  <section class="reserve-page">
+    <div class="section reserve-layout">
+      <div class="reserve-copy">
+        <p class="eyebrow">Pacto de vereda</p>
+        <h1>Deixe seu nome no caminho.</h1>
+        <p>
+          Coisa pouca de preencher: seu nome e o valor da contribuição. Depois aparece o PIX, o QR code e o
+          rumo do WhatsApp para mandar o comprovante.
+        </p>
+        <div class="selected-kms">
+          {% for kilometer in selected %}
+            <span>KM {{ kilometer.number }}</span>
+          {% endfor %}
+        </div>
+        <p class="minimum-note">Mínimo: R$ {{ suggested_km_value }} por KM. Total mínimo: R$ {{ total_suggested }}.</p>
+      </div>
+
+      <form method="post" class="reserve-form">
+        {% csrf_token %}
+        {% for kilometer in selected %}
+          <input type="hidden" name="km_numbers" value="{{ kilometer.number }}">
+        {% endfor %}
+        {% for field in form %}
+          <div class="field">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}
+            {{ field.errors }}
+          </div>
+        {% endfor %}
+        <button class="button" type="submit">Seguir para o PIX</button>
+        <a class="button secondary" href="{% url 'campaign:home' %}#quilometros">Voltar pra estrada</a>
+      </form>
+    </div>
+  </section>
+{% endblock %}

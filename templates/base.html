@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Veredas de Ajuda | Caminhos de Rosa{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'campaign/css/site.css' %}">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="{% url 'campaign:home' %}">
+          <img class="brand-logo" src="{% static 'campaign/img/marca.png' %}" alt="Caminhos de Rosa">
+          <span>
+            <span class="brand-title">Caminhos de Rosa</span>
+            <span class="brand-subtitle">KM Solidário da travessia de 160 km</span>
+          </span>
+        </a>
+        <a class="admin-link" href="{% url 'campaign:panel' %}">Caderneta</a>
+      </div>
+    </header>
+
+    {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+          <div class="message">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        Quilômetro confirmado vira alimento, e alimento é chão cuidando de gente.
+      </div>
+    </footer>
+  </body>
+</html>

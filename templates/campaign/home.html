@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <section class="hero">
+    <div class="section">
+      <div class="hero-content">
+        <img class="hero-logo" src="{% static 'campaign/img/marca.png' %}" alt="Caminhos de Rosa">
+        <p class="eyebrow">Travessia de bem-fazer</p>
+        <h1>Compre um quilômetro. Ajude uma vereda.</h1>
+        <p class="hero-copy">
+          Mateus Braga e Rafael Porto vão correr juntos os 160 km dos Caminhos de Rosa. Mineiros de orgulho
+          cheio, querem devolver em alimento um pouco do amparo que o esporte ensina.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="#quilometros">Escolher minha légua</a>
+          <a class="button secondary" href="#como-funciona">Saber do causo</a>
+        </div>
+      </div>
+      <aside class="hero-poster" aria-label="Resumo da campanha">
+        <img class="poster-bird" src="{% static 'campaign/img/ave-vereda.svg' %}" alt="">
+        <span class="poster-kicker">Corrente do bem</span>
+        <strong>160</strong>
+        <span>quilômetros de chão, suor e alimento para quem mora pelo caminho</span>
+        <div class="poster-stats">
+          <span>{{ confirmed_count }} confirmados</span>
+          <span>{{ pending_count }} no aguardo</span>
+          <span>{{ available_count }} livres</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="content-band" id="como-funciona">
+    <div class="section intro-grid">
+      <div class="copy">
+        <h2>O causo é simples: correr e repartir.</h2>
+        <p>
+          Eu, Mateus Braga, e meu amigo Rafael Porto resolvemos encarar esse desafio pela força que ele tem
+          em Minas. A prova risca o mapa por dentro da mineiridade: chão, palavra, poeira, acolhimento e
+          gente que recebe corredor como quem abre porteira de casa.
+        </p>
+        <p>
+          Nosso esporte vive de solidariedade: voluntário que aponta rumo, corredor que reparte água,
+          desconhecido que vira companheiro. Então a paga será essa corrente do bem. Todo dinheiro arrecadado
+          vira alimento para famílias da região; coisa que vem do chão, para amparar quem vive nesse chão.
+          Valor mínimo por quilômetro:
+          <strong>R$ {{ suggested_km_value }}</strong>.
+        </p>
+      </div>
+      <div class="process">
+        <div class="process-step">
+          <span>1</span>
+          <h3>Escolha a vereda</h3>
+          <p>Marque um ou mais KMs que você quer levar junto nessa travessia.</p>
+        </div>
+        <div class="process-step">
+          <span>2</span>
+          <h3>Faça o agrado</h3>
+          <p>Informe seu nome, contribua a partir de R$ {{ suggested_km_value }} por KM e faça o PIX.</p>
+        </div>
+        <div class="process-step">
+          <span>3</span>
+          <h3>Vira alimento</h3>
+          <p>Depois da conferência, seu nome entra no caminho e a ajuda vira mantimento de mesa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section km-section" id="quilometros">
+    <h2>Escolha seu pedaço de chão</h2>
+    <p class="section-note">
+      São 160 números. Cada um pode ser adotado por quem acredita que gentileza também corre longe.
+      Cada auxílio tem valor mínimo de R$ {{ suggested_km_value }}.
+    </p>
+    <p class="section-note km-mood">
+      Dizem que os 80 primeiros KMs são diversão. Os 40 do meio já vêm de cara fechada. Os 20 seguintes
+      beiram o inferno. E os últimos 20, vai saber, podem ser felicidade. Escolha conforme seu gosto:
+      alegria, aperto, danação ou chegada.
+    </p>
+    <div class="legend" aria-label="Legenda">
+      <span class="legend-item"><span class="dot available"></span> Livre</span>
+      <span class="legend-item"><span class="dot pending"></span> No aguardo do PIX</span>
+      <span class="legend-item"><span class="dot confirmed"></span> Confirmado</span>
+    </div>
+    <form method="get" action="{% url 'campaign:reserve_kilometers' %}">
+      <div class="km-toolbar">
+        <span>Selecione um ou mais KMs livres.</span>
+        <button class="button" type="submit">Levar comigo</button>
+      </div>
+      <div class="km-grid">
+        {% for km in kilometers %}
+          {% if km.status == "available" %}
+            <label class="km-card available selectable">
+              <input type="checkbox" name="km" value="{{ km.number }}">
+              <span class="km-number"><small>KM</small> {{ km.number }}</span>
+              <span class="km-status">Livre</span>
+            </label>
+          {% else %}
+            <a class="km-card {{ km.status }}" href="{% url 'campaign:kilometer_detail' km.number %}">
+              <span class="km-number"><small>KM</small> {{ km.number }}</span>
+              {% if km.status == "confirmed" %}
+                <span class="sponsor">{{ km.sponsor_name }}</span>
+                <span class="km-status">Confirmado</span>
+              {% else %}
+                <span class="sponsor">{{ km.sponsor_name|default:"Reservado" }}</span>
+              <span class="km-status">No aguardo</span>
+              {% endif %}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </form>
+  </section>
+{% endblock %}

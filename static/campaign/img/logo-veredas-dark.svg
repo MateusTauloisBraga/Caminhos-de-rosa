@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 170" role="img" aria-labelledby="title">
+  <title id="title">Caminhos de Rosa</title>
+  <g fill="none" stroke="#1a130d" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M48 142c44-19 80-17 118 0 42 18 82 18 126-1" stroke-width="5"/>
+    <path d="M64 121c34-11 66-9 98 4 31 12 62 11 95-2" stroke-width="3"/>
+    <path d="M91 37v92M61 77h62M70 58h43M73 96h43" stroke-width="6"/>
+    <path d="M91 37c-27 26-40 58-40 92M91 37c30 26 43 58 43 92" stroke-width="5"/>
+    <path d="M78 29c8-13 17-20 28-22M88 28c8-17 20-25 34-25M100 32c10-14 22-19 38-16M66 41c-14-2-25 1-34 9M71 31c-15-9-29-10-43-3M106 42c18-8 34-8 49 1M111 54c16-1 28 4 38 14M50 61c-15 7-25 17-30 31" stroke-width="4"/>
+    <path d="M338 43c14-11 29-11 45 0-17 0-25 7-31 17-4-10-8-15-14-17z" fill="#1a130d" stroke="none"/>
+    <path d="M338 43c-14 2-25 8-33 18 18-4 32-2 47-1" stroke-width="4"/>
+  </g>
+  <g fill="#1a130d" font-family="Impact, 'Arial Black', sans-serif" font-weight="900">
+    <text x="150" y="72" font-size="39" letter-spacing="-1">CAMINHOS</text>
+    <text x="150" y="118" font-size="47" letter-spacing="-2">DE ROSA</text>
+  </g>
+  <text x="303" y="139" fill="#1a130d" font-family="Georgia, serif" font-size="15" font-style="italic">travessias</text>
+</svg>

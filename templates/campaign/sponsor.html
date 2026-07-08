@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Reservar KM {{ kilometer.number }} | Caminhos de Rosa{% endblock %}
+
+{% block content %}
+  <section class="form-shell">
+    <p class="eyebrow" style="color: var(--trail);">Reserva de quilômetro</p>
+    <h1>KM {{ kilometer.number }}</h1>
+    <p>
+      Preencha seus dados para reservar. Na próxima tela você verá a chave PIX, o QR code e o botão para
+      enviar o comprovante pelo WhatsApp.
+    </p>
+
+    <p class="help">Valor mínimo: R$ {{ suggested_km_value }}.</p>
+
+    <form method="post" class="form-grid">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="field">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}
+          {{ field.errors }}
+        </div>
+      {% endfor %}
+      <button class="button" type="submit">Reservar KM {{ kilometer.number }}</button>
+      <a class="button secondary" href="{% url 'campaign:home' %}#quilometros">Voltar</a>
+    </form>
+  </section>
+{% endblock %}
