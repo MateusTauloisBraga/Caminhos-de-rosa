@@ -111,6 +111,7 @@ PIX_KEY = os.environ.get("PIX_KEY", "substitua-pela-chave-pix")
 PIX_COPY_PASTE = os.environ.get("PIX_COPY_PASTE", PIX_KEY)
 SUGGESTED_KM_VALUE = int(os.environ.get("SUGGESTED_KM_VALUE", "30"))
 WHATSAPP_NUMBER = os.environ.get("WHATSAPP_NUMBER", "5531988759513")
+FOOD_UNIT_VALUE = int(os.environ.get("FOOD_UNIT_VALUE", "80"))
 
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")

@@ -70,6 +70,23 @@
 
   <section class="section km-section" id="quilometros">
     <h2>Escolha seu pedaço de chão</h2>
+    <div class="fundraising-summary" aria-label="Resumo de arrecadação">
+      <div>
+        <span>Confirmado</span>
+        <strong>R$ {{ confirmed_total|floatformat:2 }}</strong>
+        <small>{{ confirmed_food_units }} alimentos de R$ {{ food_unit_value }}</small>
+      </div>
+      <div>
+        <span>No aguardo</span>
+        <strong>R$ {{ pending_total|floatformat:2 }}</strong>
+        <small>{{ pending_food_units }} alimentos possíveis</small>
+      </div>
+      <div>
+        <span>Total reservado</span>
+        <strong>R$ {{ reserved_total|floatformat:2 }}</strong>
+        <small>{{ reserved_food_units }} alimentos no rumo</small>
+      </div>
+    </div>
     <p class="section-note">
       São 160 números. Cada um pode ser adotado por quem acredita que gentileza também corre longe.
       Cada auxílio tem valor mínimo de R$ {{ suggested_km_value }}.

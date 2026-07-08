@@ -15,6 +15,21 @@
 
     <form method="post">
       {% csrf_token %}
+      <div class="fundraising-summary panel-summary" aria-label="Resumo financeiro">
+        <div>
+          <span>Já firmado</span>
+          <strong>R$ {{ confirmed_total|floatformat:2 }}</strong>
+        </div>
+        <div>
+          <span>Falta validar</span>
+          <strong>R$ {{ pending_total|floatformat:2 }}</strong>
+        </div>
+        <div>
+          <span>Potencial total</span>
+          <strong>R$ {{ reserved_total|floatformat:2 }}</strong>
+          <small>{{ reserved_food_units }} alimentos de R$ {{ food_unit_value }}</small>
+        </div>
+      </div>
       <div class="panel-actions">
         <button class="button" name="action" value="confirm" type="submit">Dar como certo</button>
         <button class="button secondary" name="action" value="release" type="submit">Soltar de novo</button>

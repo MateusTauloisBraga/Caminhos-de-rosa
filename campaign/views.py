@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.db import transaction
+from django.db.models import Sum
 from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -15,12 +16,22 @@ def home(request):
     confirmed_count = kilometers.filter(status=Kilometer.Status.CONFIRMED).count()
     pending_count = kilometers.filter(status=Kilometer.Status.PENDING).count()
     available_count = kilometers.filter(status=Kilometer.Status.AVAILABLE).count()
+    confirmed_total = kilometers.filter(status=Kilometer.Status.CONFIRMED).aggregate(total=Sum("amount"))["total"] or 0
+    pending_total = kilometers.filter(status=Kilometer.Status.PENDING).aggregate(total=Sum("amount"))["total"] or 0
+    reserved_total = confirmed_total + pending_total
 
     context = {
         "kilometers": kilometers,
         "confirmed_count": confirmed_count,
         "pending_count": pending_count,
         "available_count": available_count,
+        "confirmed_total": confirmed_total,
+        "pending_total": pending_total,
+        "reserved_total": reserved_total,
+        "confirmed_food_units": int(confirmed_total // settings.FOOD_UNIT_VALUE),
+        "pending_food_units": int(pending_total // settings.FOOD_UNIT_VALUE),
+        "reserved_food_units": int(reserved_total // settings.FOOD_UNIT_VALUE),
+        "food_unit_value": settings.FOOD_UNIT_VALUE,
         "pix_key": settings.PIX_KEY,
         "suggested_km_value": settings.SUGGESTED_KM_VALUE,
     }
@@ -207,6 +218,9 @@ def panel(request):
 
     pending = Kilometer.objects.filter(status=Kilometer.Status.PENDING)
     confirmed = Kilometer.objects.filter(status=Kilometer.Status.CONFIRMED)
+    pending_total = pending.aggregate(total=Sum("amount"))["total"] or 0
+    confirmed_total = confirmed.aggregate(total=Sum("amount"))["total"] or 0
+    reserved_total = pending_total + confirmed_total
     return render(
         request,
         "campaign/panel.html",
@@ -215,5 +229,10 @@ def panel(request):
             "confirmed": confirmed,
             "pending_count": pending.count(),
             "confirmed_count": confirmed.count(),
+            "pending_total": pending_total,
+            "confirmed_total": confirmed_total,
+            "reserved_total": reserved_total,
+            "reserved_food_units": int(reserved_total // settings.FOOD_UNIT_VALUE),
+            "food_unit_value": settings.FOOD_UNIT_VALUE,
         },
     )
